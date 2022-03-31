@@ -13,15 +13,14 @@ model Account {
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
+  refresh_token     String?
+  access_token      String?
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
+  id_token          String?
   session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -50,6 +49,22 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model commenttb {
+  comment_id   Int      @id @default(autoincrement())
+  comment_body String?  @db.VarChar(250)
+  drink_id     Int?
+  email        String?  @db.VarChar(150)
+  drinkdb      drinkdb? @relation(fields: [drink_id], references: [drink_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_1")
+}
+
+model drinkdb {
+  drink_id    Int         @id @default(autoincrement())
+  drink_name  String?     @db.VarChar(50)
+  drink_group String?     @default("margaritas") @db.VarChar(30)
+  drink_url   String?     @db.VarChar(500)
+  commenttb   commenttb[]
 }
 
 model ordertb {
