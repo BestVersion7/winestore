@@ -11,11 +11,11 @@ const Drink = ({ drinkData }) => {
     // comments
     const [comments, setComments] = useState([]);
     const [reload, setReload] = useState(true);
+
     const fetchComments = async () => {
         const { data } = await axios.get(
             `/api/comment?drink_id=${parseInt(drinkData.drink_id)}`
         );
-        console.log("data1");
         setComments(data);
     };
 
@@ -39,9 +39,13 @@ const Drink = ({ drinkData }) => {
                 setReload={setReload}
             />
             {/* mapping the comments using swr (no seo for update and refresh) */}
-            {comments.map((item) => (
-                <Comment key={item.comment_id} props={item} />
-            ))}
+            {comments.length > 0 ? (
+                comments.map((item) => (
+                    <Comment key={item.comment_id} props={item} />
+                ))
+            ) : (
+                <div>Be the first to comment!</div>
+            )}
         </section>
     );
 };
