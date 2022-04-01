@@ -1,33 +1,47 @@
-import { useRouter } from "next/router";
-import {
-    fetchOneDrink,
-    fetchAllDrinks,
-    fetchCommentsByDrink,
-} from "../../../../utils/apiCall";
+import { fetchOneDrink, fetchAllDrinks } from "../../../../utils/apiCall";
 import Signin from "../../../../components/Signin";
 import Image from "next/image";
+// import dynamic from "next/dynamic";
 import Comment from "../../../../components/Comment";
 import CommentForm from "../../../../components/CommentForm";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
-const Drink = ({ data, commentData }) => {
-    const router = useRouter();
-    if (router.isFallback) {
-        return <div>Loading...</div>;
-    }
+const Drink = ({ drinkData }) => {
+    // comments
+    const [comments, setComments] = useState([]);
+    const [reload, setReload] = useState(true);
+    const fetchComments = async () => {
+        const { data } = await axios.get(
+            `/api/comment?drink_id=${parseInt(drinkData.drink_id)}`
+        );
+        console.log("data1");
+        setComments(data);
+    };
+
+    useEffect(() => {
+        fetchComments();
+    }, [reload]);
+
     return (
         <section className="drink-body-page">
             <Signin />
             <br />
-            <Image
+            {/* <Image
                 width={150}
                 height={150}
                 layout="fixed"
-                src={data.drink_url}
-                alt={data.drink_name}
+                src={drinkData.drink_url}
+                alt={drinkData.drink_name}
+            /> */}
+            <p>{drinkData.drink_name}</p>
+            <CommentForm
+                drink_id={drinkData.drink_id}
+                reload={reload}
+                setReload={setReload}
             />
-            <p>{data.drink_name}</p>
-            <CommentForm drink_id={data.drink_id} />
-            {commentData.map((item) => (
+            {/* mapping the comments using swr (no seo for update and refresh) */}
+            {comments.map((item) => (
                 <Comment key={item.comment_id} props={item} />
             ))}
         </section>
@@ -37,17 +51,14 @@ const Drink = ({ data, commentData }) => {
 export default Drink;
 
 export const getStaticProps = async ({ params }) => {
-    const data = await fetchOneDrink(parseInt(params.drinkid));
-    const commentData2 = await fetchCommentsByDrink(parseInt(params.drinkid));
-    // serialize because of date prisma
-    const commentData = JSON.parse(JSON.stringify(commentData2));
-    if (data === null) {
+    const drinkData = await fetchOneDrink(parseInt(params.drinkid));
+    if (drinkData === null) {
         return {
             notFound: true,
         };
     }
     return {
-        props: { data, commentData },
+        props: { drinkData },
         revalidate: 36000,
     };
 };

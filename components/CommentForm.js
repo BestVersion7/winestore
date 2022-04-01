@@ -2,7 +2,7 @@ import { useSession } from "next-auth/react";
 import { useState } from "react";
 import axios from "axios";
 
-export default ({ drink_id }) => {
+export default ({ drink_id, reload, setReload }) => {
     const [commentBody, setCommentBody] = useState("lalaland");
     const { data: session } = useSession();
 
@@ -12,6 +12,8 @@ export default ({ drink_id }) => {
             drink_id,
             comment_body: commentBody,
         });
+        setReload(!reload);
+        setCommentBody("reset");
     };
 
     return (
