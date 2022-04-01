@@ -25,15 +25,13 @@ const Drink = ({ drinkData }) => {
 
     return (
         <section className="drink-body-page">
-            <Signin />
-            <br />
-            {/* <Image
+            <Image
                 width={150}
                 height={150}
                 layout="fixed"
                 src={drinkData.drink_url}
                 alt={drinkData.drink_name}
-            /> */}
+            />
             <p>{drinkData.drink_name}</p>
             <CommentForm
                 drink_id={drinkData.drink_id}

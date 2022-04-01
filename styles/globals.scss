@@ -5,8 +5,19 @@
 }
 
 header {
-    background-color: rgb(168, 202, 161);
+    background-color: #8b0000;
     height: 3.5em;
+    display: grid;
+    grid-template-columns: auto auto;
+    .header-signin {
+        text-align: right;
+    }
+    .signin-btn {
+        height: 3em;
+        background-color: darkseagreen;
+        // color: white;
+        border: 5px solid blue;
+    }
 }
 
 footer {
@@ -23,15 +34,41 @@ body {
     margin: 0;
     max-width: 80em;
     margin: auto;
+    .container {
+        background-image: url("https://res.cloudinary.com/crimson-flamingo/image/upload/v1556414789/270419%20gem/yellowsmokebg.jpg");
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        // min-height: 100vh;
+        @include mQ(30em) {
+            // parallax
+            background-attachment: fixed;
+        }
+        .container-wrapper {
+            margin: 0 1em;
+            @include mQ(30em) {
+                margin: 0 1.5em;
+            }
+            @include mQ(50em) {
+                margin: 0 2.5em;
+            }
+        }
+    }
+
     .drink-body {
         // display: none;
         @include mQ(30em) {
             display: grid;
             grid-template-columns: 1fr 1fr;
+            grid-gap: 3em;
         }
         @include mQ(50em) {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
+        }
+        .drink-card {
+            .drink-card-body {
+            }
         }
     }
     .drink-body-page {

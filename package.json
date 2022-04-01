@@ -18,10 +18,7 @@
     "next-sitemap": "^2.5.17",
     "nodemailer": "^6.7.3",
     "pg": "^8.7.3",
-    "prisma": "^3.11.1",
-    "react": "18.0.0",
-    "react-dom": "18.0.0",
-    "swr": "^1.2.2"
+    "prisma": "^3.11.1"
   },
   "devDependencies": {
     "eslint": "8.12.0",

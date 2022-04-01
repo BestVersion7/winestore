@@ -8,26 +8,36 @@ const DrinkCard = ({ props }) => {
     return (
         <div className="drink-card">
             <Link href={`/drinks/${props.drink_id}/${drinkNameT}`}>
-                <a>{props.drink_name}</a>
+                <a className="drink-card-body">
+                    <Image
+                        width={500}
+                        height={500}
+                        layout="responsive"
+                        src={props.drink_url}
+                        alt={props.drink_name}
+                    />
+                    <>{props.drink_name}</>
+                </a>
             </Link>
-            <Image
-                width={500}
-                height={500}
-                layout="responsive"
-                src={props.drink_url}
-                alt={props.drink_name}
-            />
         </div>
     );
 };
 
 export default function Home({ data }) {
     return (
-        <div className="drink-body">
-            {data.map((item) => (
-                <DrinkCard key={item.drink_id} props={item} />
-            ))}
-        </div>
+        <>
+            <h3>Welcome to GoldenWine</h3>
+            <i>Last update 2 April 2022</i> <br />
+            <p>
+                Link to repo: <span> </span>
+                <a href="https://github.com/BestVersion7/heroku-site">gdsfd</a>
+            </p>
+            <div className="drink-body">
+                {data.map((item) => (
+                    <DrinkCard key={item.drink_id} props={item} />
+                ))}
+            </div>
+        </>
     );
 }
 

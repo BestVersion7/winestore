@@ -8,10 +8,12 @@ export default function App({
     pageProps: { session, ...pageProps },
 }) {
     return (
-        <Layout>
-            <SessionProvider session={session}>
-                <Component {...pageProps} />
-            </SessionProvider>
-        </Layout>
+        <SessionProvider session={session}>
+            <Layout>
+                <div className="container-wrapper">
+                    <Component {...pageProps} />
+                </div>
+            </Layout>
+        </SessionProvider>
     );
 }
