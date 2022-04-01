@@ -6,7 +6,7 @@ const Header = () => {
     return (
         <header>
             <Link href="/">
-                <a>
+                <a style={{ marginLeft: "1em" }}>
                     <Image
                         height={50}
                         width={50}

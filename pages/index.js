@@ -10,8 +10,8 @@ const DrinkCard = ({ props }) => {
             <Link href={`/drinks/${props.drink_id}/${drinkNameT}`}>
                 <a className="drink-card-body">
                     <Image
-                        width={500}
-                        height={500}
+                        width={6}
+                        height={5}
                         layout="responsive"
                         src={props.drink_url}
                         alt={props.drink_name}

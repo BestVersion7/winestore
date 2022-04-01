@@ -12,9 +12,18 @@ const Drink = ({ drinkData }) => {
     const [comments, setComments] = useState([]);
     const [reload, setReload] = useState(true);
 
+    const {
+        drink_id,
+        drink_name,
+        drink_group,
+        drink_url,
+        drink_ingredients,
+        drink_directions,
+    } = drinkData;
+
     const fetchComments = async () => {
         const { data } = await axios.get(
-            `/api/comment?drink_id=${parseInt(drinkData.drink_id)}`
+            `/api/comment?drink_id=${parseInt(drink_id)}`
         );
         setComments(data);
     };
@@ -25,14 +34,22 @@ const Drink = ({ drinkData }) => {
 
     return (
         <section className="drink-body-page">
+            <br />
             <Image
                 width={150}
                 height={150}
                 layout="fixed"
-                src={drinkData.drink_url}
-                alt={drinkData.drink_name}
+                src={drink_url}
+                alt={drink_name}
             />
-            <p>{drinkData.drink_name}</p>
+            <h3>Name</h3>
+            <p>{drink_name}</p>
+            <h3>Group</h3>
+            <p>{drink_group}</p>
+            <h3>Ingredients</h3>
+            <p>{drink_ingredients}</p>
+            <h3>Directions</h3>
+            <p>{drink_directions}</p>
             <CommentForm
                 drink_id={drinkData.drink_id}
                 reload={reload}

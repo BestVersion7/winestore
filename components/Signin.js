@@ -25,7 +25,7 @@ export default function Signin() {
                 <button
                     onClick={() =>
                         signOut({
-                            callbackUrl: "/",
+                            callbackUrl: `${router.asPath}`,
                         })
                     }
                 >

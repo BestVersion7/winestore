@@ -61,9 +61,34 @@ model commenttb {
 }
 
 model drinkdb {
-  drink_id    Int         @id @default(autoincrement())
-  drink_name  String?     @db.VarChar(50)
-  drink_group String?     @default("margaritas") @db.VarChar(30)
-  drink_url   String?     @db.VarChar(500)
-  commenttb   commenttb[]
+  drink_id          Int         @id @default(autoincrement())
+  drink_name        String?     @db.VarChar(50)
+  drink_group       String?     @default("margaritas") @db.VarChar(30)
+  drink_url         String?     @db.VarChar(500)
+  drink_ingredients String?
+  drink_directions  String?
+  commenttb         commenttb[]
+}
+
+model ordertb {
+  orderid   Int     @id @default(autoincrement())
+  productid Int     @unique
+  quantity  Int?    @db.SmallInt
+  storedb   storedb @relation(fields: [productid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model storedb {
+  id         Int      @id @default(autoincrement())
+  pname      String?  @db.VarChar(50)
+  price      String?  @db.VarChar(4)
+  pictureurl String?  @db.VarChar(500)
+  ordertb    ordertb?
+}
+
+model usertb {
+  account_id Int      @id @default(autoincrement())
+  first_name String?  @db.VarChar(50)
+  last_name  String?  @db.VarChar(10)
+  gender     String?  @db.VarChar(1)
+  lastmod    DateTime @default(now()) @db.Timestamptz(6)
 }

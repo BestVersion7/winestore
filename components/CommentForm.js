@@ -5,7 +5,7 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 
 export default ({ drink_id, reload, setReload }) => {
-    const [commentBody, setCommentBody] = useState("lalaland");
+    const [commentBody, setCommentBody] = useState("");
     const { data: session } = useSession();
     const router = useRouter();
 
@@ -16,7 +16,7 @@ export default ({ drink_id, reload, setReload }) => {
             comment_body: commentBody,
         });
         setReload(!reload);
-        setCommentBody("reset");
+        setCommentBody("");
     };
 
     return (
@@ -25,6 +25,7 @@ export default ({ drink_id, reload, setReload }) => {
             {session ? (
                 <form onSubmit={handleSubmit}>
                     <textarea
+                        placeholder="Type in your comment here"
                         value={commentBody}
                         onChange={(e) => setCommentBody(e.target.value)}
                         cols="30"

@@ -6,17 +6,46 @@
 
 header {
     background-color: #8b0000;
-    height: 3.5em;
+    height: 4em;
     display: grid;
     grid-template-columns: auto auto;
+    align-items: center;
     .header-signin {
         text-align: right;
+        margin-right: 1em;
     }
     .signin-btn {
         height: 3em;
-        background-color: darkseagreen;
-        // color: white;
-        border: 5px solid blue;
+        background-color: rgb(33, 150, 243);
+        color: white;
+        padding: 6px 16px;
+        font-size: 0.875rem;
+        min-width: 64px;
+        box-sizing: border-box;
+        transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+            box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+            border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+        line-height: 1.75;
+        font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+        font-weight: 500;
+        border-radius: 4px;
+        letter-spacing: 0.02857em;
+        text-transform: uppercase;
+        border: 0;
+        margin: 0;
+        cursor: pointer;
+        display: inline-flex;
+        outline: none;
+        position: relative;
+        align-items: center;
+        user-select: none;
+        vertical-align: middle;
+        justify-content: center;
+        text-decoration: none;
+        &:hover {
+            text-decoration: none;
+            background-color: rgba(0, 0, 0, 0.08);
+        }
     }
 }
 
@@ -56,18 +85,19 @@ body {
     }
 
     .drink-body {
-        // display: none;
         @include mQ(30em) {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            grid-gap: 3em;
+            grid-gap: 5em;
         }
         @include mQ(50em) {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
         }
         .drink-card {
+            // padding: 1em;
             .drink-card-body {
+                // height: 3em;
             }
         }
     }
