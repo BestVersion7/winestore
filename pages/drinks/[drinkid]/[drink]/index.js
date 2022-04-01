@@ -1,5 +1,4 @@
 import { fetchOneDrink, fetchAllDrinks } from "../../../../utils/apiCall";
-import Signin from "../../../../components/Signin";
 import Image from "next/image";
 // import dynamic from "next/dynamic";
 import Comment from "../../../../components/Comment";
@@ -28,9 +27,7 @@ const Drink = ({ drinkData }) => {
         setComments(data);
     };
 
-    useEffect(() => {
-        fetchComments();
-    }, [reload]);
+    useEffect(() => fetchComments(), [reload]);
 
     return (
         <section className="drink-body-page">

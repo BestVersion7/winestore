@@ -1,6 +1,6 @@
 import { formatDate } from "../utils/formatDate";
 
-export default ({ props }) => {
+const Comment = ({ props }) => {
     const newDate = formatDate(props.comment_date);
     // console.log(newDate);
     return (
@@ -9,3 +9,5 @@ export default ({ props }) => {
         </section>
     );
 };
+
+export default Comment;

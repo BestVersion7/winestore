@@ -37,6 +37,8 @@ export default function Home({ data }) {
                     <DrinkCard key={item.drink_id} props={item} />
                 ))}
             </div>
+            <br />
+            <br />
         </>
     );
 }

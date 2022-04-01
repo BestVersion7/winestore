@@ -4,7 +4,7 @@ import axios from "axios";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 
-export default ({ drink_id, reload, setReload }) => {
+const CommentForm = ({ drink_id, reload, setReload }) => {
     const [commentBody, setCommentBody] = useState("");
     const { data: session } = useSession();
     const router = useRouter();
@@ -65,3 +65,5 @@ export default ({ drink_id, reload, setReload }) => {
         </>
     );
 };
+
+export default CommentForm;
