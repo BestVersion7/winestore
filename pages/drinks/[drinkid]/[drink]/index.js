@@ -3,11 +3,11 @@ import {
     fetchOneDrink,
     fetchAllDrinks,
     fetchCommentsByDrink,
-} from "../../../utils/apiCall";
-import Signin from "../../../components/Signin";
+} from "../../../../utils/apiCall";
+import Signin from "../../../../components/Signin";
 import Image from "next/image";
-import Comment from "../../../components/Comment";
-import CommentForm from "../../../components/CommentForm";
+import Comment from "../../../../components/Comment";
+import CommentForm from "../../../../components/CommentForm";
 
 const Drink = ({ data, commentData }) => {
     const router = useRouter();

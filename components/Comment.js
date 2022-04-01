@@ -22,8 +22,7 @@ const formatDate = (date) => {
 };
 export default ({ props }) => {
     const newDate = formatDate(props.comment_date);
-    // const day = formatDate.getFullYear()
-    console.log(newDate);
+    // console.log(newDate);
     return (
         <section>
             {newDate} {props.comment_user_name} wrote: {props.comment_body}
