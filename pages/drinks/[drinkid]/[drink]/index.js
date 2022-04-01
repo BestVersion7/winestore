@@ -27,7 +27,9 @@ const Drink = ({ drinkData }) => {
         setComments(data);
     };
 
-    useEffect(() => fetchComments(), [reload]);
+    useEffect(() => {
+        fetchComments();
+    }, [reload]);
 
     return (
         <section className="drink-body-page">
