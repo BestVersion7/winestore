@@ -3,11 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 const DrinkCard = ({ props }) => {
-    const drinkNameT = props.drink_name.replace(/ /g, "_").toLowerCase();
+    const drinkNameT = props.drink_name.replace(/ /g, "-").toLowerCase();
     // console.log(drinkNameT);
     return (
         <div className="drink-card">
-            <Link href={`/${props.drink_id}/${drinkNameT}`}>
+            <Link href={`/drinks/${props.drink_id}/${drinkNameT}`}>
                 <a>{props.drink_name}</a>
             </Link>
             <Image

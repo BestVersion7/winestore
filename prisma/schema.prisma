@@ -52,11 +52,12 @@ model VerificationToken {
 }
 
 model commenttb {
-  comment_id   Int      @id @default(autoincrement())
-  comment_body String?  @db.VarChar(250)
-  drink_id     Int?
-  email        String?  @db.VarChar(150)
-  drinkdb      drinkdb? @relation(fields: [drink_id], references: [drink_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_1")
+  comment_id        Int       @id @default(autoincrement())
+  comment_date      DateTime? @default(now()) @db.Timestamp(6)
+  comment_user_name String?   @db.VarChar(100)
+  comment_body      String?   @db.VarChar(250)
+  drink_id          Int?
+  drinkdb           drinkdb?  @relation(fields: [drink_id], references: [drink_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_1")
 }
 
 model drinkdb {
@@ -65,27 +66,4 @@ model drinkdb {
   drink_group String?     @default("margaritas") @db.VarChar(30)
   drink_url   String?     @db.VarChar(500)
   commenttb   commenttb[]
-}
-
-model ordertb {
-  orderid   Int     @id @default(autoincrement())
-  productid Int     @unique
-  quantity  Int?    @db.SmallInt
-  storedb   storedb @relation(fields: [productid], references: [id], onDelete: NoAction, onUpdate: NoAction)
-}
-
-model storedb {
-  id         Int      @id @default(autoincrement())
-  pname      String?  @db.VarChar(50)
-  price      String?  @db.VarChar(4)
-  pictureurl String?  @db.VarChar(500)
-  ordertb    ordertb?
-}
-
-model usertb {
-  account_id Int      @id @default(autoincrement())
-  first_name String?  @db.VarChar(50)
-  last_name  String?  @db.VarChar(10)
-  gender     String?  @db.VarChar(1)
-  lastmod    DateTime @default(now()) @db.Timestamptz(6)
 }

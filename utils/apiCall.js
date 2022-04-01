@@ -19,3 +19,14 @@ export const fetchOneDrink = async (drink) => {
         return console.log(err);
     }
 };
+
+export const fetchCommentsByDrink = async (drink) => {
+    try {
+        const data = await prisma.commenttb.findMany({
+            where: { drink_id: drink },
+        });
+        return data;
+    } catch (err) {
+        return console.log(err);
+    }
+};
