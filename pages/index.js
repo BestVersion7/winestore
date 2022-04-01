@@ -30,7 +30,9 @@ export default function Home({ data }) {
             <i>Last update 2 April 2022</i> <br />
             <p>
                 Link to repo: <span> </span>
-                <a href="https://github.com/BestVersion7/heroku-site">gdsfd</a>
+                <a href="https://github.com/bestversion7/winestore">
+                    https://github.com/bestversion7/winestore
+                </a>
             </p>
             <div className="drink-body">
                 {data.map((item) => (
