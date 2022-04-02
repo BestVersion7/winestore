@@ -5,12 +5,17 @@ import Comment from "../../../../components/Comment";
 import CommentForm from "../../../../components/CommentForm";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 const Drink = ({ drinkData }) => {
     // comments
     const [comments, setComments] = useState([]);
     const [reload, setReload] = useState(true);
 
+    const router = useRouter();
+    if (router.isFallback) {
+        return <div>Loading...</div>;
+    }
     const {
         drink_id,
         drink_name,
@@ -70,6 +75,7 @@ export default Drink;
 
 export const getStaticProps = async ({ params }) => {
     const drinkData = await fetchOneDrink(parseInt(params.drinkid));
+    // console.log(drinkData);
     if (drinkData === null) {
         return {
             notFound: true,
@@ -83,7 +89,8 @@ export const getStaticProps = async ({ params }) => {
 
 export const getStaticPaths = async () => {
     const data = await fetchAllDrinks();
-    // console.log(data)
+    // console.log(data.drink_id);
+
     const paths = data.map(({ drink_id, drink_name }) => ({
         params: {
             drinkid: drink_id.toString(),
@@ -93,6 +100,6 @@ export const getStaticPaths = async () => {
     return {
         paths,
         // limit
-        fallback: false,
+        fallback: true,
     };
 };

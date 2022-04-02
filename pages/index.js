@@ -23,10 +23,10 @@ const DrinkCard = ({ props }) => {
     );
 };
 
-export default function Home({ data }) {
+export default function Home({ champagneData, wineData, beerData }) {
     return (
         <>
-            <h3>Welcome to GoldenWine</h3>
+            <h3>Welcome to Wine Store</h3>
             <i>Last update 2 April 2022</i> <br />
             <p>
                 Link to repo: <span> </span>
@@ -34,11 +34,30 @@ export default function Home({ data }) {
                     https://github.com/bestversion7/winestore
                 </a>
             </p>
-            <div className="drink-body">
-                {data.map((item) => (
-                    <DrinkCard key={item.drink_id} props={item} />
-                ))}
-            </div>
+            <>
+                <h2>Champagne</h2>
+                <div className="drink-body">
+                    {champagneData.map((item) => (
+                        <DrinkCard key={item.drink_id} props={item} />
+                    ))}
+                </div>
+            </>
+            <>
+                <h2>Beer</h2>
+                <div className="drink-body">
+                    {beerData.map((item) => (
+                        <DrinkCard key={item.drink_id} props={item} />
+                    ))}
+                </div>
+            </>
+            <>
+                <h2>Wine</h2>
+                <div className="drink-body">
+                    {wineData.map((item) => (
+                        <DrinkCard key={item.drink_id} props={item} />
+                    ))}
+                </div>
+            </>
             <br />
             <br />
         </>
@@ -47,10 +66,17 @@ export default function Home({ data }) {
 
 export const getStaticProps = async () => {
     const data = await fetchAllDrinks();
-    // console.log(data);
+    const champagneData = data.filter(
+        (item) => item.drink_group == "champagne"
+    );
+    const beerData = data.filter((item) => item.drink_group == "beer");
+    const wineData = data.filter((item) => item.drink_group == "wine");
+    // console.log(champagneData);
     return {
         props: {
-            data,
+            champagneData,
+            beerData,
+            wineData,
         },
     };
 };
