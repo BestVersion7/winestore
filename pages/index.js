@@ -1,6 +1,7 @@
 import { fetchAllDrinks } from "../utils/apiCall";
 import Image from "next/image";
 import Link from "next/link";
+import Meta from "../components/Meta";
 
 const DrinkCard = (props) => {
     const drinkNameT = props.drink_name.replace(/ /g, "-").toLowerCase();
@@ -26,8 +27,13 @@ const DrinkCard = (props) => {
 export default function Home({ champagneData, wineData, beerData }) {
     return (
         <>
+            <Meta
+                title={"Wine Blog"}
+                keywords={"how to make drinks"}
+                description={"How to make drinks."}
+            />
             <h3>Welcome to Wine Store</h3>
-            <i>Last update 2 April 2022</i> <br />
+            <i>Last update 4 April 2022</i> <br />
             <p>
                 Link to repo: <span> </span>
                 <a href="https://github.com/bestversion7/winestore">

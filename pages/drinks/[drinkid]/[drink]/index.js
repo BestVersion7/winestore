@@ -5,6 +5,7 @@ import Comment from "../../../../components/Comment";
 import CommentForm from "../../../../components/CommentForm";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Meta from "../../../../components/Meta";
 
 const Drink = ({ drinkData }) => {
     // comments
@@ -30,6 +31,11 @@ const Drink = ({ drinkData }) => {
 
     return (
         <section className="drink-body-page">
+            <Meta
+                title={drink_name}
+                keywords={drink_ingredients}
+                description={drink_directions}
+            />
             <br />
             <Image
                 width={150}
