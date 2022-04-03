@@ -22,5 +22,5 @@ module.exports = {
             `${siteUrl}/drinksitemap.xml`,
         ],
     },
-    exclude: ["/drinksitemap.xml"],
+    exclude: ["/drinks/*", "/drinksitemap.xml"],
 };
