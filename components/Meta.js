@@ -1,11 +1,11 @@
 import Head from "next/head";
 
-const Meta = ({ title, keywords, description }) => {
+const Meta = (props) => {
     return (
         <Head>
-            <title>{title}</title>
-            <meta name="keywords" content={keywords} />
-            <meta name="description" content={description} />
+            <title>{props.title}</title>
+            <meta name="keywords" content={props.keywords} />
+            <meta name="description" content={props.description} />
         </Head>
     );
 };

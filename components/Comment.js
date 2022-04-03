@@ -1,6 +1,6 @@
 import { formatDate } from "../utils/formatDate";
 
-const Comment = ({ props }) => {
+const Comment = (props) => {
     const newDate = formatDate(props.comment_date);
     // console.log(newDate);
     return (

@@ -1,21 +1,15 @@
-import { fetchOneDrink, fetchAllDrinks } from "../../../../utils/apiCall";
+import { fetchOneDrink } from "../../../../utils/apiCall";
 import Image from "next/image";
 // import dynamic from "next/dynamic";
 import Comment from "../../../../components/Comment";
 import CommentForm from "../../../../components/CommentForm";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 
 const Drink = ({ drinkData }) => {
     // comments
     const [comments, setComments] = useState([]);
     const [reload, setReload] = useState(true);
-
-    const router = useRouter();
-    if (router.isFallback) {
-        return <div>Loading...</div>;
-    }
     const {
         drink_id,
         drink_name,
@@ -26,9 +20,7 @@ const Drink = ({ drinkData }) => {
     } = drinkData;
 
     const fetchComments = async () => {
-        const { data } = await axios.get(
-            `/api/comment?drink_id=${parseInt(drink_id)}`
-        );
+        const { data } = await axios.get(`/api/comment?drink_id=${drink_id}`);
         setComments(data);
     };
 
@@ -55,14 +47,20 @@ const Drink = ({ drinkData }) => {
             <h3>Directions</h3>
             <p>{drink_directions}</p>
             <CommentForm
-                drink_id={drinkData.drink_id}
+                drink_id={drink_id}
                 reload={reload}
                 setReload={setReload}
             />
             {/* mapping the comments using swr (no seo for update and refresh) */}
             {comments.length > 0 ? (
                 comments.map((item) => (
-                    <Comment key={item.comment_id} props={item} />
+                    <Comment
+                        key={item.comment_id}
+                        comment_user_name={item.comment_user_name}
+                        comment_id={item.comment_id}
+                        comment_date={item.comment_date}
+                        comment_body={item.comment_body}
+                    />
                 ))
             ) : (
                 <div>Be the first to comment!</div>
@@ -81,6 +79,7 @@ export const getStaticProps = async ({ params }) => {
             notFound: true,
         };
     }
+
     return {
         props: { drinkData },
         revalidate: 36000,
@@ -88,18 +87,26 @@ export const getStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths = async () => {
-    const data = await fetchAllDrinks();
+    // const data = await fetchAllDrinks();
     // console.log(data.drink_id);
 
-    const paths = data.map(({ drink_id, drink_name }) => ({
-        params: {
-            drinkid: drink_id.toString(),
-            drink: drink_name.replace(/ /g, "-").toLowerCase(),
+    // const paths = data.map(({ drink_id, drink_name }) => ({
+    //     params: {
+    //         drinkid: drink_id.toString(),
+    //         drink: drink_name.replace(/ /g, "-").toLowerCase(),
+    //     },
+    // }));
+    const paths = [
+        {
+            params: {
+                drinkid: "8",
+                drink: "port-wine-flip",
+            },
         },
-    }));
+    ];
     return {
         paths,
         // limit
-        fallback: true,
+        fallback: "blocking",
     };
 };

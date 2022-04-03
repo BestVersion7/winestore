@@ -2,7 +2,7 @@ import { fetchAllDrinks } from "../utils/apiCall";
 import Image from "next/image";
 import Link from "next/link";
 
-const DrinkCard = ({ props }) => {
+const DrinkCard = (props) => {
     const drinkNameT = props.drink_name.replace(/ /g, "-").toLowerCase();
     // console.log(drinkNameT);
     return (
@@ -38,7 +38,12 @@ export default function Home({ champagneData, wineData, beerData }) {
                 <h2>Champagne</h2>
                 <div className="drink-body">
                     {champagneData.map((item) => (
-                        <DrinkCard key={item.drink_id} props={item} />
+                        <DrinkCard
+                            key={item.drink_id}
+                            drink_id={item.drink_id}
+                            drink_name={item.drink_name}
+                            drink_url={item.drink_url}
+                        />
                     ))}
                 </div>
             </>
@@ -46,7 +51,12 @@ export default function Home({ champagneData, wineData, beerData }) {
                 <h2>Beer</h2>
                 <div className="drink-body">
                     {beerData.map((item) => (
-                        <DrinkCard key={item.drink_id} props={item} />
+                        <DrinkCard
+                            key={item.drink_id}
+                            drink_id={item.drink_id}
+                            drink_name={item.drink_name}
+                            drink_url={item.drink_url}
+                        />
                     ))}
                 </div>
             </>
@@ -54,7 +64,12 @@ export default function Home({ champagneData, wineData, beerData }) {
                 <h2>Wine</h2>
                 <div className="drink-body">
                     {wineData.map((item) => (
-                        <DrinkCard key={item.drink_id} props={item} />
+                        <DrinkCard
+                            key={item.drink_id}
+                            drink_id={item.drink_id}
+                            drink_name={item.drink_name}
+                            drink_url={item.drink_url}
+                        />
                     ))}
                 </div>
             </>
