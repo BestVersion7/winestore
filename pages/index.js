@@ -1,7 +1,6 @@
 import { fetchAllDrinks } from "../utils/apiCall";
 import Meta from "../components/Meta";
 import DrinkCard from "../components/DrinkCard";
-
 export default function Home({ champagneData, wineData, beerData }) {
     return (
         <>
@@ -17,7 +16,7 @@ export default function Home({ champagneData, wineData, beerData }) {
                 <a
                     href="https://github.com/bestversion7/winestore"
                     target="_blank"
-                    rel="noopener"
+                    rel="noreferrer"
                 >
                     https://github.com/bestversion7/winestore
                 </a>

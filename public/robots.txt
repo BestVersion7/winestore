@@ -1,0 +1,15 @@
+# *
+User-agent: *
+Disallow: /protected
+
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://winestore.vercel.app
+
+# Sitemaps
+Sitemap: https://winestore.vercel.app/sitemap.xml
+Sitemap: https://winestore.vercel.app/sitemap-0.xml
+Sitemap: https://winestore.vercel.app/drinksitemap.xml
