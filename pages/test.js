@@ -12,7 +12,7 @@ const TestPage = ({ data }) => {
 export default TestPage;
 
 export const getStaticProps = async (req, res) => {
-    const data2 = await prisma.blog.findFirst({
+    const data2 = await prisma.blog.findUnique({
         where: {
             article_id: 1,
         },
@@ -21,7 +21,7 @@ export const getStaticProps = async (req, res) => {
         },
     });
     const data = JSON.parse(JSON.stringify(data2));
-    console.log(data);
+    // console.log(data);
     return {
         props: { data },
     };
