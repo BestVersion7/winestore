@@ -67,6 +67,7 @@ model drinkdb {
   drink_url         String?     @db.VarChar(500)
   drink_ingredients String?
   drink_directions  String?
+  drink_price       Int?        @default(20)
   commenttb         commenttb[]
 }
 
@@ -87,8 +88,39 @@ model storedb {
 
 model usertb {
   account_id Int      @id @default(autoincrement())
-  first_name String?  @db.VarChar(50)
   last_name  String?  @db.VarChar(10)
   gender     String?  @db.VarChar(1)
   lastmod    DateTime @default(now()) @db.Timestamptz(6)
+  first_name String?
+}
+
+model blog {
+  article_id          Int       @id @default(autoincrement())
+  article_date        DateTime? @default(now()) @db.Date
+  article_image_small String?   @db.VarChar(300)
+  article_image       String?   @db.VarChar(300)
+  article_title       String?   @db.VarChar(100)
+  article_post        String?
+  article_public      Boolean?
+  comment             comment[]
+}
+
+model comment {
+  comment_id         Int       @id @default(autoincrement())
+  comment_date       DateTime? @default(now()) @db.Timestamp(6)
+  comment_user_name  String?   @db.VarChar(100)
+  comment_body       String?   @db.VarChar(500)
+  comment_user_image String?   @db.VarChar(150)
+  article_id         Int?
+  blog               blog?     @relation(fields: [article_id], references: [article_id], onDelete: NoAction, onUpdate: NoAction, map: "fk_1")
+}
+
+model reel {
+  reel_id              Int       @id @default(autoincrement())
+  reel_date            DateTime? @default(now()) @db.Timestamp(6)
+  reel_image           String?   @db.VarChar(300)
+  reel_category        String?   @default("Outdoor") @db.VarChar(80)
+  reel_public          Boolean?
+  reel_video           Boolean?
+  reel_video_thumbnail String?   @db.VarChar(150)
 }
